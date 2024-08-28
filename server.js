@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 
 // INDEX 
 app.get('/todos', (req, res) => {
-    res.json(todos)
+    res.render('index.ejs', { data: todos })
 })
 
 // CREATE
@@ -42,7 +42,7 @@ app.post('/todos', (req, res) => {
     todos.push(newTodo)
 
     // then show the new todos
-    res.json(todos)
+    res.redirect('/todos')
 })
 
 app.get("/todos/new", (req, res) => {
