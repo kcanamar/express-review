@@ -16,6 +16,7 @@ const todos = [
 // MIDDLEWARE
 ///////////////////
 app.use(morgan('dev'))
+app.use(express.urlencoded({ extended: false })) // gives us access to req.body from x-www-form-urlencoded
 
 // ROUTES
 ///////////////////
@@ -25,6 +26,22 @@ app.get('/', (req, res) => {
 
 // INDEX 
 app.get('/todos', (req, res) => {
+    res.json(todos)
+})
+
+// CREATE
+app.post('/todos', (req, res) => {
+
+    // create our new todo from the request body
+    let newTodo = {
+        title: req.body.title,
+        content: req.body.content
+    }
+
+    // append our new todo to the todos array
+    todos.push(newTodo)
+
+    // then show the new todos
     res.json(todos)
 })
 
