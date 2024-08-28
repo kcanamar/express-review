@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOW</title>
+</head>
+<body>
+    <h1>SHOW PAGE</h1>    
+    <% console.log(data) %>
+    <a href="/todos">GO BACK</a>
+
+    <h1><%= data.title %></h1>
+    <p><i><%= data.content %></i></p>
+
+    <a href="/todos/edit/<%= data.id %>">EDIT THIS TODO</a>
+</body>
+</html>

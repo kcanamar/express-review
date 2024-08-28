@@ -55,8 +55,9 @@ app.get('/todos/:id', (req, res) => {
 
     // find our todo based on the request param
     let foundTodo = todos[id]
+    foundTodo.id = id
     // respond with the found todo
-    res.json(foundTodo)
+    res.render('show.ejs', { data: foundTodo })
 })
 
 // LISTENER

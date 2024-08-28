@@ -12,9 +12,11 @@
     <a href="/todos/new">CREATE A NEW TODO</a>
 
     <ul>
-        <% data.forEach((todo) => { %>
+        <% data.forEach((todo, index) => { %>
             <li>
-                <h2><%= todo.title %></h2>
+                <a href="/todos/<%= index %>">
+                    <h2><%= todo.title %></h2>
+                </a>
                 <p><%= todo.content %></p>
             </li>
     
