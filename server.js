@@ -77,6 +77,15 @@ app.put('/todos/:id', (req, res) => {
     // redirect back to the show route of the updated todo
     res.redirect(`/todos/${id}`)
 })
+
+// DELETE
+app.delete('/todos/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+
+    todos.splice(id, 1)
+
+    res.redirect('/todos')
+})
 // SHOW
 app.get('/todos/:id', (req, res) => {
     let id = parseInt(req.params.id);
