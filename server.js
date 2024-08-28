@@ -2,6 +2,7 @@
 ///////////////////
 const express = require('express')
 const morgan = require('morgan')
+const methodOverride = require('method-override')
 
 const app = express();
 const { PORT = 3000 } = process.env
@@ -17,6 +18,9 @@ const todos = [
 ///////////////////
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: false })) // gives us access to req.body from x-www-form-urlencoded
+app.use(methodOverride("_method"))
+
+// app.use((req, res, next) => { ........... next() })
 
 // ROUTES
 ///////////////////
@@ -45,10 +49,34 @@ app.post('/todos', (req, res) => {
     res.redirect('/todos')
 })
 
+// NEW
 app.get("/todos/new", (req, res) => {
     res.render('new.ejs')
 })
 
+// EDIT
+app.get('/todos/edit/:id', (req, res) => {
+    // find the todo to edit
+    let foundTodo = todos[req.params.id]
+    foundTodo.id = req.params.id
+    // pass the found todo to the edit page
+    res.render('edit.ejs', { data: foundTodo })
+})
+
+// UPDATE
+app.put('/todos/:id', (req, res) => {
+    let updatedTodo = {
+        title: req.body.title,
+        content: req.body.content
+    }
+
+    const id = req.params.id
+    // Replace the existing todo with the updated todo
+    todos[id] = updatedTodo
+
+    // redirect back to the show route of the updated todo
+    res.redirect(`/todos/${id}`)
+})
 // SHOW
 app.get('/todos/:id', (req, res) => {
     let id = parseInt(req.params.id);
