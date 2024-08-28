@@ -45,6 +45,10 @@ app.post('/todos', (req, res) => {
     res.json(todos)
 })
 
+app.get("/todos/new", (req, res) => {
+    res.render('new.ejs')
+})
+
 // SHOW
 app.get('/todos/:id', (req, res) => {
     let id = parseInt(req.params.id);
